@@ -6,6 +6,7 @@
 
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
+# include "keys.h"
 # include <fcntl.h>
 # include <math.h>
 
@@ -36,9 +37,13 @@ typedef struct  s_fractol
     t_mlx       mlx;
     t_image     image;
     int         type;
+	int			iterations;
+	int			zoom;
 }               t_fractol;
 
 int	            keyboard_read(int key, t_fractol *fdf);
+void        	add_axis(t_fractol *fractol);
+void        	update_fractol(t_fractol *fractol);
 
 /*
 **  Utils

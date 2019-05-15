@@ -26,6 +26,7 @@ int         main(int argc, char **argv)
 			WIN_HEIGHT);
 		fractol.image.data = mlx_get_data_addr(fractol.mlx.img, \
 			&fractol.image.bpp, &fractol.image.size, &fractol.image.endian);
+        update_fractol(&fractol);
     	mlx_key_hook(fractol.mlx.win, keyboard_read, &fractol);
 		mlx_loop(fractol.mlx.init);
     }

@@ -4,7 +4,8 @@ MINILIBX_INCLUDES = -I ./minilibx_macos
 LIBFT = libft/libft.a
 
 SRCS =	./srcs/main.c \
-		./srcs/fractol_control.c
+		./srcs/fractol_control.c \
+		./srcs/printing.c
 
 UTILS = ./utils/str_to_low.c \
 		./utils/str_to_header.c
