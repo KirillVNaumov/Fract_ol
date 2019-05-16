@@ -51,26 +51,26 @@ void        add_units(t_fractol *fractol)
 {
     int     i;
 
-    if (fractol->origin.x > 0 && fractol->origin.x < WIN_WIDTH)
+    if (fractol->origin.x + fractol->offset.x > 0 && fractol->origin.x + fractol->offset.x < WIN_WIDTH)
     {
-          i = fractol->origin.y;
-          if (fractol->origin.y > WIN_HEIGHT)
+          i = fractol->origin.y + fractol->offset.y;
+          if (i > WIN_HEIGHT)
           {
             while (i > WIN_HEIGHT)
                 i -= fractol->zoom;
             while (i > 0)
             {
-                draw_horizontal_dash(fractol->origin.x, i, fractol);
+                draw_horizontal_dash(fractol->origin.x + fractol->offset.x, i, fractol);
                 i -= fractol->zoom;
             }
           }
-          else if (fractol->origin.y < 0)
+          else if (i < 0)
           {
             while (i < 0)
                 i += fractol->zoom;
             while (i < WIN_HEIGHT)
             {
-                draw_horizontal_dash(fractol->origin.x, i, fractol);
+                draw_horizontal_dash(fractol->origin.x + fractol->offset.x, i, fractol);
                 i += fractol->zoom;
             }
           }
@@ -78,37 +78,37 @@ void        add_units(t_fractol *fractol)
           {
             while (i > 0)
             {
-                draw_horizontal_dash(fractol->origin.x, i, fractol);
+                draw_horizontal_dash(fractol->origin.x + fractol->offset.x, i, fractol);
                 i -= fractol->zoom;
             }
-            i = fractol->origin.y;
+            i = fractol->origin.y + fractol->offset.y;
             while (i < WIN_HEIGHT)
             {
-                draw_horizontal_dash(fractol->origin.x, i, fractol);
+                draw_horizontal_dash(fractol->origin.x + fractol->offset.x, i, fractol);
                 i += fractol->zoom;
             }
           }
     }
-    if (fractol->origin.y > 0 && fractol->origin.y < WIN_HEIGHT)
+    if (fractol->origin.y + fractol->offset.y > 0 && fractol->origin.y + fractol->offset.y < WIN_HEIGHT)
     {
-          i = fractol->origin.x;
-          if (fractol->origin.x > WIN_WIDTH)
+          i = fractol->origin.x + fractol->offset.x;
+          if (i > WIN_WIDTH)
           {
             while (i > WIN_WIDTH)
                 i -= fractol->zoom;
             while (i > 0)
             {
-                draw_vertical_dash(i, fractol->origin.y, fractol);
+                draw_vertical_dash(i, fractol->origin.y + fractol->offset.y, fractol);
                 i -= fractol->zoom;
             }
           }
-          else if (fractol->origin.x < 0)
+          else if (i < 0)
           {
             while (i < 0)
                 i += fractol->zoom;
             while (i < WIN_WIDTH)
             {
-                draw_vertical_dash(i, fractol->origin.y, fractol);
+                draw_vertical_dash(i, fractol->origin.y + fractol->offset.y, fractol);
                 i += fractol->zoom;
             }
           }
@@ -116,13 +116,13 @@ void        add_units(t_fractol *fractol)
           {
             while (i > 0)
             {
-                draw_vertical_dash(i, fractol->origin.y, fractol);
+                draw_vertical_dash(i, fractol->origin.y + fractol->offset.y, fractol);
                 i -= fractol->zoom;
             }
-            i = fractol->origin.x;
+            i = fractol->origin.x + fractol->offset.x;
             while (i < WIN_WIDTH)
             {
-                draw_vertical_dash(i, fractol->origin.y, fractol);
+                draw_vertical_dash(i, fractol->origin.y + fractol->offset.y, fractol);
                 i += fractol->zoom;
             }
           }
@@ -135,23 +135,25 @@ void        add_axis(t_fractol *fractol)
     int     pos;
 
     i = 0;
-    while (i < WIN_HEIGHT)
-    {
-        pos = WIN_WIDTH / 2 * 4 + 4 * WIN_WIDTH * i;
-        fractol->image.data[pos] = (char)255;
-        fractol->image.data[pos + 1] = (char)255;
-        fractol->image.data[pos + 2] = (char)255;
-        ++i;
-    }
+    if (fractol->origin.x + fractol->offset.x > 0 && fractol->origin.x + fractol->offset.x < WIN_WIDTH)
+        while (i < WIN_HEIGHT)
+        {
+            pos = (fractol->origin.x + fractol->offset.x) * 4 + 4 * WIN_WIDTH * i;
+            fractol->image.data[pos] = (char)255;
+            fractol->image.data[pos + 1] = (char)255;
+            fractol->image.data[pos + 2] = (char)255;
+            ++i;
+        }
     i = 0;
-    while (i < WIN_WIDTH)
-    {
-        pos = i * 4 + 4 * WIN_WIDTH * WIN_HEIGHT / 2;
-        fractol->image.data[pos] = (char)255;
-        fractol->image.data[pos + 1] = (char)255;
-        fractol->image.data[pos + 2] = (char)255;
-        ++i;
-    }
+    if (fractol->origin.y + fractol->offset.y > 0 && fractol->origin.y + fractol->offset.y < WIN_HEIGHT)
+        while (i < WIN_WIDTH)
+        {
+            pos = i * 4 + 4 * WIN_WIDTH * (fractol->origin.y + fractol->offset.y);
+            fractol->image.data[pos] = (char)255;
+            fractol->image.data[pos + 1] = (char)255;
+            fractol->image.data[pos + 2] = (char)255;
+            ++i;
+        }
     add_units(fractol);
 }
 
