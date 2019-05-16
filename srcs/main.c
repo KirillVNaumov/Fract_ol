@@ -38,9 +38,10 @@ int         main(int argc, char **argv)
             error("Listed fractal doesn't exist. Try './fractol' for usage.");
         init(&fractol, argv[1]);
         update_fractol(&fractol);
-    	mlx_hook(fractol.mlx.win, 2, 3, keyboard_read, &fractol);
-    	mlx_hook(fractol.mlx.win, 4, 3, mouse_read, &fractol);
-    	// mlx_hook(fractol.mlx.win, 6, 3, mouse_movement, &fractol);
+    	mlx_hook(fractol.mlx.win, 2, 3, key_press_hook, &fractol);
+        mlx_hook(fractol.mlx.win, 4, 3, mouse_press_hook, &fractol);
+        mlx_hook(fractol.mlx.win, 5, 3, mouse_release_hook, &fractol);
+		// mlx_hook(fractol.mlx.win, 6, 3, motion_hook, &fractol);
 		mlx_loop(fractol.mlx.init);
     }
     else
