@@ -17,6 +17,13 @@ typedef struct	s_mlx
 	void	*img;
 }				t_mlx;
 
+// typedef struct	s_mouse
+// {
+// 	int		state;
+// 	int		pos_x;
+// 	int		pos_y;
+// }				t_mouse;
+
 typedef struct	s_image
 {
 	char	*data;
@@ -41,6 +48,7 @@ typedef struct	s_point
 typedef struct  s_fractol
 {
     t_mlx       mlx;
+	// t_mouse		mouse;
     t_image     image;
 	t_point		offset;
 	t_point		origin;
@@ -51,6 +59,7 @@ typedef struct  s_fractol
 
 int	            keyboard_read(int key, t_fractol *fractol);
 int				mouse_read(int mousecode, int x, int y, t_fractol *fractol);
+int				mouse_movement(int x, int y, t_fractol *fractol);
 void        	add_axis(t_fractol *fractol);
 void        	update_fractol(t_fractol *fractol);
 

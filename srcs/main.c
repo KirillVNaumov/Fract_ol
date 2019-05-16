@@ -40,6 +40,7 @@ int         main(int argc, char **argv)
         update_fractol(&fractol);
     	mlx_hook(fractol.mlx.win, 2, 3, keyboard_read, &fractol);
     	mlx_hook(fractol.mlx.win, 4, 3, mouse_read, &fractol);
+    	// mlx_hook(fractol.mlx.win, 6, 3, mouse_movement, &fractol);
 		mlx_loop(fractol.mlx.init);
     }
     else
