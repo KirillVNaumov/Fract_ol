@@ -30,7 +30,7 @@ all: $(EXEC)
 
 $(EXEC): $(OBJ)
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC)$(RESET)"
-	@make -C libft
+	# @make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC)$(RESET)"
 	@gcc -Wall -Wextra -Werror $(OBJ) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g -o $(EXEC)
 	@echo "$(BLUE_EXTRA)$(EXEC)$(BLUE): Complete$(RESET)"
@@ -40,7 +40,7 @@ clean:
 	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC)$(RESET)"; \
 	/bin/rm -rf $(OBJ); \
 	fi
-	@make -C libft clean
+	# @make -C libft clean
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
 fclean: clean
@@ -48,7 +48,7 @@ fclean: clean
 	echo "$(RED)Deleting executable $(RED_EXTRA)$(EXEC)$(RESET)"; \
 	/bin/rm -f $(EXEC); \
 	fi
-	@make -C libft fclean
+	# @make -C libft fclean
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"
 
 re: fclean all

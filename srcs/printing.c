@@ -1,5 +1,17 @@
 #include "fractol.h"
 
+void        add_units(t_fractol *fractol)
+{
+    if (fractol->origin.x > 0 && fractol->origin.x < WIN_WIDTH)
+    {
+
+    }
+    if (fractol->origin.y > 0 && fractol->origin.y < WIN_HEIGHT)
+    {
+        
+    }
+}
+
 void        add_axis(t_fractol *fractol)
 {
     int     i;
@@ -23,6 +35,7 @@ void        add_axis(t_fractol *fractol)
         fractol->image.data[pos + 2] = (char)255;
         ++i;
     }
+    add_units(fractol);
 }
 
 void        update_fractol(t_fractol *fractol)

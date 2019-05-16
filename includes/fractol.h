@@ -32,16 +32,25 @@ typedef struct	s_color
 	int		blue;
 }				t_color;
 
+typedef struct	s_point
+{
+	int		x;
+	int		y;
+}				t_point;
+
 typedef struct  s_fractol
 {
     t_mlx       mlx;
     t_image     image;
+	t_point		offset;
+	t_point		origin;
     int         type;
 	int			iterations;
 	int			zoom;
 }               t_fractol;
 
-int	            keyboard_read(int key, t_fractol *fdf);
+int	            keyboard_read(int key, t_fractol *fractol);
+int				mouse_read(int mousecode, int x, int y, t_fractol *fractol);
 void        	add_axis(t_fractol *fractol);
 void        	update_fractol(t_fractol *fractol);
 
