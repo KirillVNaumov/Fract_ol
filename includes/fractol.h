@@ -84,6 +84,7 @@ char            *str_to_low(char *str);
 char            *str_to_header(char *str);
 void			to_absolute(t_point **relative, t_fractol *fractol);
 void			to_relative(t_point **absolute, t_fractol *fractol);
+double			find_double_radius(t_point *pixel);
 t_palette   	*new_palette(void);
 
 #endif

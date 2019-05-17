@@ -3,9 +3,9 @@
 void        create_palette(t_fractol *fractol)
 {
     fractol->palette = new_palette();
-    fractol->palette->color[0]->red = 255; //WHITE
-    fractol->palette->color[0]->green = 255;
-    fractol->palette->color[0]->blue = 255;
+    fractol->palette->color[0]->red = 100; //WHITE
+    fractol->palette->color[0]->green = 100;
+    fractol->palette->color[0]->blue = 100;
     fractol->palette->color[1]->red = 255; //RED
     fractol->palette->color[1]->green = 0;
     fractol->palette->color[1]->blue = 0;
@@ -27,6 +27,30 @@ void        create_palette(t_fractol *fractol)
     fractol->palette->color[7]->red = 148; //VIOLET
     fractol->palette->color[7]->green = 0;
     fractol->palette->color[7]->blue = 211;
+    fractol->palette->color[8]->red = 255; //WHITE
+    fractol->palette->color[8]->green = 255;
+    fractol->palette->color[8]->blue = 255;
+    fractol->palette->color[9]->red = 255; //RED
+    fractol->palette->color[9]->green = 0;
+    fractol->palette->color[9]->blue = 0;
+    fractol->palette->color[10]->red = 255; //ORANGE
+    fractol->palette->color[10]->green = 127;
+    fractol->palette->color[10]->blue = 0;
+    fractol->palette->color[11]->red = 255; //YELLOW
+    fractol->palette->color[11]->green = 255;
+    fractol->palette->color[11]->blue = 0;
+    fractol->palette->color[12]->red = 0; //GREEN
+    fractol->palette->color[12]->green = 255;
+    fractol->palette->color[12]->blue = 0;
+    fractol->palette->color[13]->red = 0; //BLUE
+    fractol->palette->color[13]->green = 0;
+    fractol->palette->color[13]->blue = 255;
+    fractol->palette->color[14]->red = 75; //INDIGO
+    fractol->palette->color[14]->green = 0;
+    fractol->palette->color[14]->blue = 130;
+    // fractol->palette->color[15]->red = 148; //VIOLET
+    // fractol->palette->color[15]->green = 0;
+    // fractol->palette->color[15]->blue = 211;
     fractol->palette->next = new_palette();
     fractol->palette->next->next = new_palette();
     fractol->palette->next->next->next = new_palette();

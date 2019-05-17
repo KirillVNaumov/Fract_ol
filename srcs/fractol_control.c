@@ -37,19 +37,27 @@ int				mouse_release_hook(int mousecode, int x, int y, t_fractol *fractol)
 {
     if (mousecode == MOUSE_LEFT_CLK)
 			fractol->mouse.state = 0;
-		fractol->mouse.pos.x = x;
-		fractol->mouse.pos.y = y;
+		x = 0;
+		y = 0;
 		return (0);
 }
 
 int				motion_hook(int x, int y, t_fractol *fractol)
 {
 	if (fractol->mouse.state == 1 && (x > 0 && y > 0) \
-			&& (x < WIN_WIDTH && y < WIN_HEIGHT))
+			&& (x < WIN_WIDTH && y < WIN_HEIGHT) && (fractol->type == 1))
 	{
 		fractol->offset.x = fractol->offset.x - (fractol->mouse.start.x - x) / 15;
 		fractol->offset.y = fractol->offset.y - (fractol->mouse.start.y - y) / 15;
+  	update_fractol(fractol);
 	}
-  update_fractol(fractol);
+	if (fractol->mouse.state == 0 && (x > 0 && y > 0) \
+			&& (x < WIN_WIDTH && y < WIN_HEIGHT) && fractol->type == 2)
+	{
+		// ft_printf("Released\n");
+		fractol->mouse.pos.x = x;
+		fractol->mouse.pos.y = y;		
+  	update_fractol(fractol);
+	}
 	return (0);
 }
