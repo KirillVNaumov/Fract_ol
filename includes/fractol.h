@@ -17,6 +17,12 @@ typedef struct	s_mlx
 	void	*img;
 }				t_mlx;
 
+typedef struct	s_point
+{
+	double		x;
+	double		y;
+}				t_point;
+
 typedef struct	s_image
 {
 	char	*data;
@@ -32,11 +38,11 @@ typedef struct	s_color
 	int		blue;
 }				t_color;
 
-typedef struct	s_point
+typedef struct	s_palette
 {
-	int		x;
-	int		y;
-}				t_point;
+	t_color		**color;
+	struct s_palette	*next;
+}				t_palette;
 
 typedef struct	s_mouse
 {
@@ -55,6 +61,7 @@ typedef struct  s_fractol
     int         type;
 	int			iterations;
 	int			zoom;
+	t_palette	*palette;
 }               t_fractol;
 
 int				motion_hook(int x, int y, t_fractol *fractol);
@@ -64,6 +71,10 @@ int				mouse_release_hook(int mousecode, int x, int y, t_fractol *fractol);
 int				mouse_movement(int x, int y, t_fractol *fractol);
 void        	add_axis(t_fractol *fractol);
 void        	update_fractol(t_fractol *fractol);
+void        	create_palette(t_fractol *fractol);
+
+void			julia(t_fractol *fractol);
+void			mandelbrot(t_fractol *fractol);
 
 /*
 **  Utils
@@ -71,5 +82,8 @@ void        	update_fractol(t_fractol *fractol);
 
 char            *str_to_low(char *str);
 char            *str_to_header(char *str);
+void			to_absolute(t_point **relative, t_fractol *fractol);
+void			to_relative(t_point **absolute, t_fractol *fractol);
+t_palette   	*new_palette(void);
 
 #endif

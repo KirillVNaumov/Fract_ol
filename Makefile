@@ -5,9 +5,14 @@ LIBFT = libft/libft.a
 
 SRCS =	./srcs/main.c \
 		./srcs/fractol_control.c \
+		./srcs/mandelbrot.c \
+		./srcs/julia.c \
+		./srcs/create_palette.c \
 		./srcs/printing.c
 
-UTILS = ./utils/str_to_low.c \
+UTILS = ./utils/struct_operations/t_point.c \
+		./utils/struct_operations/t_palette.c \
+		./utils/str_to_low.c \
 		./utils/str_to_header.c
 
 OBJ = $(SRCS:.c=.o) $(UTILS:.c=.o)

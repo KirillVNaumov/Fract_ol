@@ -179,11 +179,20 @@ void        clear_image(t_fractol *fractol)
     }
 }
 
+void        load_fractal(t_fractol *fractol)
+{
+    if (fractol->type == 1)
+        mandelbrot(fractol);
+    else if (fractol->type == 2)
+        julia(fractol);
+}
+
 void        update_fractol(t_fractol *fractol)
 {
 
     clear_image(fractol);
-    add_axis(fractol);
+    load_fractal(fractol);
+    // add_axis(fractol);
 
     mlx_put_image_to_window(fractol->mlx.init, fractol->mlx.win, \
 								fractol->mlx.img, 0, 0);

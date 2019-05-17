@@ -11,6 +11,8 @@ int         identify_fractol(char *str, t_fractol *fractol)
     return (1);
 }
 
+
+
 void        init(t_fractol *fractol, char *name)
 {
     fractol->mlx.init = mlx_init();
@@ -21,11 +23,12 @@ void        init(t_fractol *fractol, char *name)
     fractol->image.data = mlx_get_data_addr(fractol->mlx.img, \
         &fractol->image.bpp, &fractol->image.size, &fractol->image.endian);
     fractol->zoom = 50;
-    fractol->iterations = 10;
+    fractol->iterations = 1;
     fractol->offset.x = 0;
     fractol->offset.y = 0;
     fractol->origin.x = WIN_WIDTH / 2;
     fractol->origin.y = WIN_HEIGHT / 2;
+    create_palette(fractol);
 }
 
 int         main(int argc, char **argv)
