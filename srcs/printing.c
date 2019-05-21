@@ -179,12 +179,39 @@ void        clear_image(t_fractol *fractol)
     }
 }
 
+void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point *, t_fractol *))
+{
+	t_point		*pixel;
+	int			depth;
+	int			pos;
+
+	pixel = (t_point *)malloc(sizeof(t_point));
+	pixel->y = 0;
+	while (pixel->y < WIN_HEIGHT)
+	{
+		pixel->x = 0;
+		while (pixel->x < WIN_WIDTH)
+		{
+			to_absolute(&pixel, fractol);
+			depth = define_fractal_pixel(pixel, fractol);
+			to_relative(&pixel, fractol);
+			pos = pixel->x * 4 + 4 * WIN_WIDTH * pixel->y;
+			fractol->image.data[pos] = fractol->palette->color->blue + (depth * 2.62);
+			fractol->image.data[pos + 1] = fractol->palette->color->green + (depth * 2.62);
+			fractol->image.data[pos + 2] = fractol->palette->color->red + (depth * 2.62);			
+			++pixel->x;
+		}
+		++pixel->y;
+	}
+    free(pixel);
+}
+
 void        load_fractal(t_fractol *fractol)
 {
     if (fractol->type == 1)
-        mandelbrot(fractol);
+        draw_fractal(fractol, mandelbrot);
     else if (fractol->type == 2)
-        julia(fractol);
+        draw_fractal(fractol, julia);
 }
 
 void        update_fractol(t_fractol *fractol)
@@ -200,4 +227,8 @@ void        update_fractol(t_fractol *fractol)
                         ft_strjoin("Number of iterations : ", ft_itoa(fractol->iterations)));
     mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 35, 0xFFFFFF, \
                         ft_strjoin("Zoom level: ", ft_itoa(fractol->zoom)));
+    mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 65, 0xFFFFFF, \
+                        "'Space' - Change color");
+    mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 95, 0xFFFFFF, \
+                    "'F' - To freeze fractal");
 }

@@ -1,8 +1,6 @@
 #include "fractol.h"
 
-#include "fractol.h"
-
-t_color			*define_color_julia(t_point *pixel, t_fractol *fractol)
+int				julia(t_point *pixel, t_fractol *fractol)
 {
 	t_point		result_of_iteration;
 	t_point		doppelganger;
@@ -36,36 +34,5 @@ t_color			*define_color_julia(t_point *pixel, t_fractol *fractol)
 		z_from_formula.y = result_of_iteration.y;
 		++i;
 	}
-	if (i == fractol->iterations)
-		return (color);
-	while (i >= 15)
-		i -= 15;
-	return (fractol->palette->color[i]);
-}
-
-void			julia(t_fractol *fractol)
-{
-	t_point		*pixel;
-	t_color		*pixel_color;
-	int			pos;
-
-	pixel = (t_point *)malloc(sizeof(t_point));
-	pixel_color = (t_color *)malloc(sizeof(t_color));
-	pixel->y = 0;
-	while (pixel->y < WIN_HEIGHT)
-	{
-		pixel->x = 0;
-		while (pixel->x < WIN_WIDTH)
-		{
-			to_absolute(&pixel, fractol);
-			pixel_color = define_color_julia(pixel, fractol);
-			to_relative(&pixel, fractol);
-			pos = pixel->x * 4 + 4 * WIN_WIDTH * pixel->y;
-			fractol->image.data[pos] = pixel_color->red;
-			fractol->image.data[pos + 1] = pixel_color->green;
-			fractol->image.data[pos + 2] = pixel_color->blue;			
-			++pixel->x;
-		}
-		++pixel->y;
-	}
+	return (i);
 }

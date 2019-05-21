@@ -3,6 +3,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
+# define THREADS 8
 
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
@@ -40,7 +41,8 @@ typedef struct	s_color
 
 typedef struct	s_palette
 {
-	t_color		**color;
+	// t_color		**color;
+	t_color		*color;
 	struct s_palette	*next;
 }				t_palette;
 
@@ -59,6 +61,7 @@ typedef struct  s_fractol
 	t_point		offset;
 	t_point		origin;
     int         type;
+	int			freeze;
 	int			iterations;
 	int			zoom;
 	t_palette	*palette;
@@ -73,8 +76,8 @@ void        	add_axis(t_fractol *fractol);
 void        	update_fractol(t_fractol *fractol);
 void        	create_palette(t_fractol *fractol);
 
-void			julia(t_fractol *fractol);
-void			mandelbrot(t_fractol *fractol);
+int				julia(t_point *pixel, t_fractol *fractol);
+int				mandelbrot(t_point *pixel, t_fractol *fractol);
 
 /*
 **  Utils
