@@ -62,6 +62,7 @@ typedef struct  s_fractol
 	t_point		origin;
     int         type;
 	int			freeze;
+	int			axis;
 	int			iterations;
 	int			zoom;
 	t_palette	*palette;
@@ -76,8 +77,8 @@ void        	add_axis(t_fractol *fractol);
 void        	update_fractol(t_fractol *fractol);
 void        	create_palette(t_fractol *fractol);
 
-int				julia(t_point *pixel, t_fractol *fractol);
-int				mandelbrot(t_point *pixel, t_fractol *fractol);
+int				julia(t_point pixel, t_fractol *fractol);
+int				mandelbrot(t_point pixel, t_fractol *fractol);
 
 /*
 **  Utils

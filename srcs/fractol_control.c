@@ -2,7 +2,7 @@
 
 int				mouse_press_hook(int mousecode, int x, int y, t_fractol *fractol)
 {
-	if (x > 0 && y > 0 && x < WIN_WIDTH && y < WIN_HEIGHT && fractol->freeze == 0)
+	if (x > 0 && y > 0 && x < WIN_WIDTH && y < WIN_HEIGHT/* && fractol->freeze == 0*/)
 	{
 		if (mousecode == MOUSE_UP_SCRLL)
 			fractol->zoom += 5;
@@ -25,6 +25,8 @@ int		    key_press_hook(int key, t_fractol *fractol)
 	  exit(0);
 	if (key == KEY_ANSI_F)
 		fractol->freeze = (fractol->freeze == 0) ? 1 : 0;
+	if (key == KEY_ANSI_A)
+		fractol->axis = (fractol->axis == 0) ? 1 : 0;
 	if (key == KEY_SPACE)
 		fractol->palette = fractol->palette->next;
 	if (key == KEY_UPARROW)

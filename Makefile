@@ -5,10 +5,10 @@ LIBFT = libft/libft.a
 
 SRCS =	./srcs/main.c \
 		./srcs/fractol_control.c \
-		./srcs/mandelbrot.c \
-		./srcs/julia.c \
 		./srcs/create_palette.c \
-		./srcs/printing.c
+		./srcs/printing.c \
+		./srcs/fractals/mandelbrot.c \
+		./srcs/fractals/julia.c
 
 UTILS = ./utils/struct_operations/t_point.c \
 		./utils/struct_operations/t_palette.c \

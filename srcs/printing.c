@@ -179,31 +179,31 @@ void        clear_image(t_fractol *fractol)
     }
 }
 
-void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point *, t_fractol *))
+void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point, t_fractol *))
 {
-	t_point		*pixel;
+	t_point		pixel;
 	int			depth;
 	int			pos;
 
-	pixel = (t_point *)malloc(sizeof(t_point));
-	pixel->y = 0;
-	while (pixel->y < WIN_HEIGHT)
+	pixel.y = 0;
+	while (pixel.y < WIN_HEIGHT)
 	{
-		pixel->x = 0;
-		while (pixel->x < WIN_WIDTH)
+		pixel.x = 0;
+		while (pixel.x < WIN_WIDTH)
 		{
-			to_absolute(&pixel, fractol);
+            pixel.x += fractol->offset.x;
+            pixel.y += fractol->offset.y;
 			depth = define_fractal_pixel(pixel, fractol);
-			to_relative(&pixel, fractol);
-			pos = pixel->x * 4 + 4 * WIN_WIDTH * pixel->y;
+            pixel.x -= fractol->offset.x;
+            pixel.y -= fractol->offset.y;
+            pos = pixel.x * 4 + 4 * WIN_WIDTH * pixel.y;
 			fractol->image.data[pos] = fractol->palette->color->blue + (depth * 2.62);
 			fractol->image.data[pos + 1] = fractol->palette->color->green + (depth * 2.62);
 			fractol->image.data[pos + 2] = fractol->palette->color->red + (depth * 2.62);			
-			++pixel->x;
+			++pixel.x;
 		}
-		++pixel->y;
+		++pixel.y;
 	}
-    free(pixel);
 }
 
 void        load_fractal(t_fractol *fractol)
@@ -219,8 +219,8 @@ void        update_fractol(t_fractol *fractol)
 
     clear_image(fractol);
     load_fractal(fractol);
-    // add_axis(fractol);
-
+    if (fractol->axis == 1)
+        add_axis(fractol);
     mlx_put_image_to_window(fractol->mlx.init, fractol->mlx.win, \
 								fractol->mlx.img, 0, 0);
     mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 5, 0xFFFFFF, \
@@ -231,4 +231,8 @@ void        update_fractol(t_fractol *fractol)
                         "'Space' - Change color");
     mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 95, 0xFFFFFF, \
                     "'F' - To freeze fractal");
+    mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 125, 0xFFFFFF, \
+                    "'A' - To add axis");
+    mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 155, 0xFFFFFF, \
+                    "'R' - Redraw the fractal");
 }
