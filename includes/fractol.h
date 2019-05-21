@@ -41,7 +41,6 @@ typedef struct	s_color
 
 typedef struct	s_palette
 {
-	// t_color		**color;
 	t_color		*color;
 	struct s_palette	*next;
 }				t_palette;

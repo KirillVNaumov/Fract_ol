@@ -37,7 +37,7 @@ void        init(t_fractol *fractol, char *name)
 
 int         main(int argc, char **argv)
 {
-    t_fractol   fractol;
+    t_fractol       fractol;
 
     if (argc == 2)
     {
@@ -45,11 +45,11 @@ int         main(int argc, char **argv)
             error("Listed fractal doesn't exist. Try './fractol' for usage.");
         init(&fractol, argv[1]);
         update_fractol(&fractol);
-    	mlx_hook(fractol.mlx.win, 2, 3, key_press_hook, &fractol);
+        mlx_hook(fractol.mlx.win, 2, 3, key_press_hook, &fractol);
         mlx_hook(fractol.mlx.win, 4, 3, mouse_press_hook, &fractol);
         mlx_hook(fractol.mlx.win, 5, 3, mouse_release_hook, &fractol);
-		mlx_hook(fractol.mlx.win, 6, 3, motion_hook, &fractol);
-		mlx_loop(fractol.mlx.init);
+        mlx_hook(fractol.mlx.win, 6, 3, motion_hook, &fractol);
+        mlx_loop(fractol.mlx.init);
     }
     else
         ft_printf("Usage: ./fractol [mandelbrot/julia]\n");
