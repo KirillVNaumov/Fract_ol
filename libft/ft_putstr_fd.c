@@ -6,7 +6,7 @@
 /*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 14:39:34 by knaumov           #+#    #+#             */
-/*   Updated: 2019/05/21 23:34:28 by knaumov          ###   ########.fr       */
+/*   Updated: 2019/05/21 23:36:37 by knaumov          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,5 @@ void	ft_putstr_fd(char const *s, int fd)
 {
 	if (s == NULL)
 		return ;
-	write(fd, &s[i], ft_strlen(s));
+	write(fd, s, ft_strlen(s));
 }
