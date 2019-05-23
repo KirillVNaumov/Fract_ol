@@ -212,6 +212,8 @@ void        load_fractal(t_fractol *fractol)
         draw_fractal(fractol, mandelbrot);
     else if (fractol->type == 2)
         draw_fractal(fractol, julia);
+    else if (fractol->type == 3)
+        draw_fractal(fractol, newton);
 }
 
 void        update_fractol(t_fractol *fractol)

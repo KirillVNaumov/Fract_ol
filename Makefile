@@ -3,21 +3,31 @@ MINILIBX_INCLUDES = -I ./minilibx_macos
 
 LIBFT = libft/libft.a
 
-SRCS =	./srcs/main.c \
-		./srcs/fractol_control.c \
-		./srcs/create_palette.c \
-		./srcs/printing.c \
-		./srcs/fractals/mandelbrot.c \
-		./srcs/fractals/julia.c
+SRCS_FRACTOL =	./srcs/fractol/main.c \
+				./srcs/fractol/fractol_control.c \
+				./srcs/fractol/create_palette.c \
+				./srcs/fractol/printing.c \
+				./srcs/fractol/fractals/mandelbrot.c \
+				./srcs/fractol/fractals/julia.c \
+				./srcs/fractol/fractals/newton.c
 
-UTILS = ./utils/struct_operations/t_point.c \
-		./utils/struct_operations/t_palette.c \
-		./utils/str_to_low.c \
-		./utils/str_to_header.c
+SRCS_FRACTOL =	./srcs/newton_function_generator/main.c \
+				./srcs/newton_function_generator/parse_input.c \
+				./srcs/newton_function_generator/create_file.c
 
-OBJ = $(SRCS:.c=.o) $(UTILS:.c=.o)
+UTILS = 		./utils/struct_operations/t_point.c \
+				./utils/struct_operations/t_palette.c \
+				./utils/struct_operations/t_summand.c \
+				./utils/clear_spaces.c \
+				./utils/str_to_low.c \
+				./utils/str_to_header.c
 
-EXEC = fractol
+OBJ_FRACTOL = $(SRCS_FRACTOL:.c=.o)
+OBJ_CALC = $(SRCS_CALC:.c=.o)
+OBJ_UTILS = $(UTILS:.c=.o)
+
+EXEC_FRACTOL = fractol
+EXEC_CALC = newton
 
 RESET = \033[0m
 RED = \033[0;31m
@@ -31,27 +41,38 @@ BLUE_EXTRA = \033[1;36m
 	@echo "$(GREEN) - Creating $(GREEN_EXTRA)$<...$(RESET)"
 	@gcc -Wall -Wextra -Werror -g -c $< -o $@ $(INCLUDES)
 
-all: $(EXEC)
+all: $(EXEC_FRACTOL)
 
-$(EXEC): $(OBJ)
-	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC)$(RESET)"
+$(EXEC_CALC): $(OBJ_CALC) $(OBJ_UTILS)
+	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
 	# @make -C libft
-	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC)$(RESET)"
-	@gcc -Wall -Wextra -Werror $(OBJ) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g -o $(EXEC)
-	@echo "$(BLUE_EXTRA)$(EXEC)$(BLUE): Complete$(RESET)"
+	@echo "$(GREEN)Compiling EXEC_FRACTOLutable $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
+	@gcc -Wall -Wextra -Werror $(OBJ_CALC) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g -o $(EXEC_FRACTOL)
+	@echo "$(BLUE_EXTRA)$(EXEC_CALC)$(BLUE): Complete$(RESET)"
+
+$(EXEC_FRACTOL): $(OBJ_FRACTOL) $(OBJ_UTILS)
+	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
+	# @make -C libft
+	@echo "$(GREEN)Compiling EXEC_FRACTOLutable $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
+	@gcc -Wall -Wextra -Werror $(OBJ_CALC) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g -o $(EXEC_FRACTOL)
+	@echo "$(BLUE_EXTRA)$(EXEC_FRACTOL)$(BLUE): Complete$(RESET)"
 
 clean:
-	@if [ -a "srcs/main.o" ]; then \
-	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC)$(RESET)"; \
-	/bin/rm -rf $(OBJ); \
+	@if [ -a "srcs/fractol/main.o" ]; then \
+	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC_FRACTOL)$(RESET)"; \
+	/bin/rm -rf $(OBJ_FRACTOL); \
+	fi
+	@if [ -a "srcs/newton_function_generator/main.o" ]; then \
+	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC_FRACTOL)$(RESET)"; \
+	/bin/rm -rf $(OBJ_FRACTOL); \
 	fi
 	# @make -C libft clean
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
 fclean: clean
-	@if [ -a "$(EXEC)" ]; then \
-	echo "$(RED)Deleting executable $(RED_EXTRA)$(EXEC)$(RESET)"; \
-	/bin/rm -f $(EXEC); \
+	@if [ -a "$(EXEC_FRACTOL)" ]; then \
+	echo "$(RED)Deleting EXEC_FRACTOLutable $(RED_EXTRA)$(EXEC_FRACTOL)$(RESET)"; \
+	/bin/rm -f $(EXEC_FRACTOL); \
 	fi
 	# @make -C libft fclean
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"

@@ -10,6 +10,7 @@
 # include "keys.h"
 # include <fcntl.h>
 # include <math.h>
+#include <complex.h>
 
 typedef struct	s_mlx
 {
@@ -77,6 +78,7 @@ void        	update_fractol(t_fractol *fractol);
 void        	create_palette(t_fractol *fractol);
 
 int				julia(t_point pixel, t_fractol *fractol);
+int				newton(t_point pixel, t_fractol *fractol);
 int				mandelbrot(t_point pixel, t_fractol *fractol);
 
 /*

@@ -6,6 +6,8 @@ int         identify_fractol(char *str, t_fractol *fractol)
         fractol->type = 1;
     else if (!ft_strcmp(str_to_low(str), "julia"))
         fractol->type = 2;
+    else if (!ft_strcmp(str_to_low(str), "newton"))
+        fractol->type = 3;
     else
         return (-1);
     return (1);
@@ -52,6 +54,6 @@ int         main(int argc, char **argv)
         mlx_loop(fractol.mlx.init);
     }
     else
-        ft_printf("Usage: ./fractol [mandelbrot/julia]\n");
+        ft_printf("Usage: ./fractol [mandelbrot/julia/newton]\n");
     return (0);
 }
