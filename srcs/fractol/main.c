@@ -34,6 +34,7 @@ void        init(t_fractol *fractol, char *name)
     fractol->mouse.pos.x = WIN_WIDTH / 2;
     fractol->mouse.pos.y = WIN_HEIGHT / 2;
     fractol->freeze = 0;
+    fractol->psychedelic = (fractol->type == 3) ? 1 : 0;
     create_palette(fractol);
 }
 

@@ -12,9 +12,10 @@ int				newton(t_point pixel, t_fractol *fractol)
     double              margin_error;
 	int			i;
 
-    margin_error = 0.01;
+    margin_error = 0.001;
 	i = 0;
-    previous_result = ((double)(pixel.x - WIN_WIDTH / 2) / fractol->zoom) + ((double)(pixel.y - WIN_HEIGHT / 2) / fractol->zoom) * I;
+    previous_result = 	((double)(pixel.x - WIN_WIDTH / 2) / fractol->zoom) + \
+						((double)(pixel.y - WIN_HEIGHT / 2) / fractol->zoom) * I;
 	while (i < fractol->iterations)
 	{
 		result = function(previous_result) / derivative(previous_result);

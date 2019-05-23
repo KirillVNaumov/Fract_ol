@@ -179,9 +179,29 @@ void        clear_image(t_fractol *fractol)
     }
 }
 
+t_color         define_color(int depth, t_fractol *fractol)
+{
+    t_color     color;
+
+    if (fractol->psychedelic == 1)
+    {
+        color.blue = fractol->psychedelic_palette[depth % 10]->blue;
+        color.green = fractol->psychedelic_palette[depth % 10]->green;
+        color.red = fractol->psychedelic_palette[depth % 10]->red;	
+    }
+    else
+    {
+        color.blue = fractol->palette->color->blue + (depth * 2.62);
+        color.green = fractol->palette->color->green + (depth * 2.62);
+        color.red = fractol->palette->color->red + (depth * 2.62);	
+    }
+    return (color);
+}
+
 void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point, t_fractol *))
 {
 	t_point		pixel;
+    t_color     color;
 	int			depth;
 	int			pos;
 
@@ -197,9 +217,10 @@ void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point, t_f
             pixel.x -= fractol->offset.x;
             pixel.y -= fractol->offset.y;
             pos = pixel.x * 4 + 4 * WIN_WIDTH * pixel.y;
-			fractol->image.data[pos] = fractol->palette->color->blue + (depth * 2.62);
-			fractol->image.data[pos + 1] = fractol->palette->color->green + (depth * 2.62);
-			fractol->image.data[pos + 2] = fractol->palette->color->red + (depth * 2.62);			
+            color = define_color(depth, fractol);
+			fractol->image.data[pos] = color.blue;
+			fractol->image.data[pos + 1] = color.green;
+			fractol->image.data[pos + 2] = color.red;			
 			++pixel.x;
 		}
 		++pixel.y;
@@ -237,4 +258,6 @@ void        update_fractol(t_fractol *fractol)
                     "'A' - To add axis");
     mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 155, 0xFFFFFF, \
                     "'R' - Redraw the fractal");
+    mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 185, 0xFFFFFF, \
+                    "'P' - Psychedelic effect");
 }

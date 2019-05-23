@@ -6,28 +6,6 @@ void        print_usage(void)
     printf("The function suppose to be in polymonial form\n");
 }
 
-void        print_summand(t_calc *info)
-{
-    t_summand   *tmp;
-
-    tmp = info->function;
-    printf("Function:\n");
-    while (tmp)
-    {
-        printf("Coefficient - %d\n", tmp->coefficient);
-        printf("Power - %d\n\n", tmp->power);
-        tmp = tmp->next;
-    }
-    tmp = info->derivative;
-    printf("Derivative:\n");
-    while (tmp)
-    {
-        printf("Coefficient - %d\n", tmp->coefficient);
-        printf("Power - %d\n\n", tmp->power);
-        tmp = tmp->next;
-    }
-}
-
 void        optimize_summand(t_calc *info)
 {
     t_summand  *new;
@@ -93,7 +71,6 @@ int         main(int argc, char **argv)
         parse_input(argv, &info);
         optimize_summand(&info);
         create_derivative(&info);
-        print_summand(&info);
         create_file(&info);
     }
     else

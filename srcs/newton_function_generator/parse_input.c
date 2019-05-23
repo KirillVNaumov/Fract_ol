@@ -71,16 +71,11 @@ void            check_function(char *function, t_calc *info)
                 error("Parsing error");
     }
     parse_function(function, info);
-    return (function);
 }
 
 void        parse_input(char **argv, t_calc *info)
 {
-    if (ft_strlen(argv[1]) != 2 || argv[1][0] != '-' || (argv[1][1] != 'i' && argv[1][1] != 'd'))
-        error("No indecation of derivative or integral");
-    if (argv[1][1] == 'i')
-        info->type = 2;
-    else
-        info->type = 1;
-    check_function(str_to_low(clear_spaces(ft_strdup(argv[2]))), info);
+    // if (ft_strlen(argv[1]) != 2 || argv[1][0] != '-' || (argv[1][1] != 'i' && argv[1][1] != 'd'))
+    //     error("No indecation of derivative or integral");
+    check_function(str_to_low(clear_spaces(ft_strdup(argv[1]))), info);
 }

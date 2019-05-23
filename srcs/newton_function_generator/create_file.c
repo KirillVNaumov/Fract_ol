@@ -4,14 +4,18 @@ char            *struct_to_code(t_summand *list)
 {
     char        *answer;
     int         counter;
+    int         if_first;
 
     answer = ft_strnew(1);
+    if_first = 1;
     while (list)
     {
-        answer = ft_update(answer, ft_strjoin(answer, " "));
-        if (list->coefficient > 0)
-            answer = ft_update(answer, ft_strjoin(answer, "+"));
-        answer = ft_update(answer, ft_strjoin(answer, ft_itoa(list->coefficient)));
+        if (list->coefficient > 0 && if_first == 0)
+            answer = ft_update(answer, ft_strjoin(answer, " + "));
+        if (list->coefficient < 0)
+                answer = ft_update(answer, ft_strjoin(answer, " - "));
+        if_first = 0;
+        answer = ft_update(answer, ft_strjoin(answer, ft_itoa(ft_abs(list->coefficient))));
         counter = 0;
         while (counter++ < list->power)
             answer = ft_update(answer, ft_strjoin(answer, " * z"));
@@ -20,6 +24,7 @@ char            *struct_to_code(t_summand *list)
     return (answer);
 }
 
+
 void            create_file(t_calc *info)
 {
     int         fd;
@@ -27,13 +32,11 @@ void            create_file(t_calc *info)
     char        *function;
     char        *derivative;
 
-    info->type = 1;
-
-	file = fopen("function_and_derivative.c", "wb");
+	file = fopen("srcs/fractol/fractals/function_and_derivative.c", "wb");
     fclose(file);
     function = struct_to_code(info->function);
     derivative = struct_to_code(info->derivative);
-    fd = open("function_and_derivative.c", O_RDWR);
+    fd = open("srcs/fractol/fractals/function_and_derivative.c", O_RDWR);
     ft_putstr_fd("#include \"fractol.h\"\n\n", fd);
     ft_putstr_fd("double complex\t\tfunction(double complex z)\n", fd);
     ft_putstr_fd("{\n\treturn (", fd);

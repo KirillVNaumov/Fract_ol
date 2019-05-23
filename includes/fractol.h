@@ -65,6 +65,8 @@ typedef struct  s_fractol
 	int			axis;
 	int			iterations;
 	int			zoom;
+	int			psychedelic;
+	t_color		**psychedelic_palette;
 	t_palette	*palette;
 }               t_fractol;
 
@@ -80,6 +82,8 @@ void        	create_palette(t_fractol *fractol);
 int				julia(t_point pixel, t_fractol *fractol);
 int				newton(t_point pixel, t_fractol *fractol);
 int				mandelbrot(t_point pixel, t_fractol *fractol);
+double complex      function(double complex z);
+double complex      derivative(double complex z);
 
 /*
 **  Utils
