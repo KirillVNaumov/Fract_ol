@@ -33,7 +33,7 @@ void            parse_function(char *function, t_calc *info)
     }
 }
 
-void            check_function(char *function, t_calc *info)
+void            parse_input(char *function, t_calc *info)
 {
     int     i;
 
@@ -71,11 +71,4 @@ void            check_function(char *function, t_calc *info)
                 error("Parsing error");
     }
     parse_function(function, info);
-}
-
-void        parse_input(char **argv, t_calc *info)
-{
-    // if (ft_strlen(argv[1]) != 2 || argv[1][0] != '-' || (argv[1][1] != 'i' && argv[1][1] != 'd'))
-    //     error("No indecation of derivative or integral");
-    check_function(str_to_low(clear_spaces(ft_strdup(argv[1]))), info);
 }

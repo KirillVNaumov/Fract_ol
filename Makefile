@@ -12,7 +12,7 @@ SRCS_FRACTOL =	./srcs/fractol/main.c \
 				./srcs/fractol/fractals/newton.c \
 				./srcs/fractol/fractals/function_and_derivative.c
 
-SRCS_CALC =	./srcs/newton_function_generator/main.c \
+SRCS_CALC =		./srcs/newton_function_generator/main.c \
 				./srcs/newton_function_generator/parse_input.c \
 				./srcs/newton_function_generator/create_file.c
 
