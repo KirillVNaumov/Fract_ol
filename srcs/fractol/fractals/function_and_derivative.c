@@ -2,9 +2,9 @@
 
 double complex		function(double complex z)
 {
-	return (8 * z * z * z + 3 * z * z - 4);
+	return (2 * z * z * z + 5 * z * z - 6 * z + 5);
 }
 double complex		derivative(double complex z)
 {
-	return (24 * z * z + 6 * z);
+	return (6 * z * z + 10 * z - 6);
 }
