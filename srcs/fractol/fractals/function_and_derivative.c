@@ -1,10 +1,10 @@
 #include "fractol.h"
 
-double complex		function(double complex z)
+COMPLEX		function(COMPLEX z)
 {
-	return (1 * z * z * z - 1);
+	return (4 * z * z * z * z * z * z * z * z + 42 * z * z - 3);
 }
-double complex		derivative(double complex z)
+COMPLEX		derivative(COMPLEX z)
 {
-	return (3 * z * z);
+	return (32 * z * z * z * z * z * z * z + 84 * z);
 }

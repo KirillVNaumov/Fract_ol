@@ -50,11 +50,11 @@ void			create_file(t_calc *info)
 	derivative = struct_to_code(info->derivative);
 	fd = open("srcs/fractol/fractals/function_and_derivative.c", O_RDWR);
 	ft_putstr_fd("#include \"fractol.h\"\n\n", fd);
-	ft_putstr_fd("double complex\t\tfunction(double complex z)\n", fd);
+	ft_putstr_fd("COMPLEX\t\tfunction(COMPLEX z)\n", fd);
 	ft_putstr_fd("{\n\treturn (", fd);
 	ft_putstr_fd(function, fd);
 	ft_putstr_fd(");\n}\n", fd);
-	ft_putstr_fd("double complex\t\tderivative(double complex z)\n", fd);
+	ft_putstr_fd("COMPLEX\t\tderivative(COMPLEX z)\n", fd);
 	ft_putstr_fd("{\n\treturn (", fd);
 	ft_putstr_fd(derivative, fd);
 	ft_putstr_fd(");\n}\n", fd);

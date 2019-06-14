@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/05 21:28:30 by knaumov           #+#    #+#             */
+/*   Updated: 2019/06/05 21:28:32 by knaumov          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int 			mandelbrot(t_point pixel, t_fractol *fractol)
+int				mandelbrot(t_point pixel, t_fractol *fractol)
 {
 	t_point		result;
 	t_point		constant;
@@ -14,7 +26,8 @@ int 			mandelbrot(t_point pixel, t_fractol *fractol)
 	constant.y = (double)(pixel.y - WIN_HEIGHT / 2) / fractol->zoom;
 	while (i < fractol->iterations)
 	{
-		result.x = (previous_result.x * previous_result.x - previous_result.y * previous_result.y + constant.x);
+		result.x = (previous_result.x * previous_result.x - \
+					previous_result.y * previous_result.y + constant.x);
 		result.y = (2 * previous_result.x * previous_result.y + constant.y);
 		if (find_double_radius(&result) >= 4)
 			break ;

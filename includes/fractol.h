@@ -16,6 +16,7 @@
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define THREADS 8
+# define COMPLEX double complex
 
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
@@ -92,6 +93,8 @@ int						mouse_movement(int x, int y, t_fractol *fractol);
 void					add_axis(t_fractol *fractol);
 void					update_fractol(t_fractol *fractol);
 void					create_palette(t_fractol *fractol);
+void					add_axis(t_fractol *fractol);
+void					load_fractal(t_fractol *fractol);
 
 /*
 **	Fractals

@@ -14,7 +14,7 @@
 
 void			print_usage(void)
 {
-	ft_printf("Usage: ./calc [-i/-d] ");
+	ft_printf("Usage: ./calc ");
 	ft_printf("[function (write as a continuation of 'f(x) = ')]\n");
 	ft_printf("The function suppose to be in polymonial form\n");
 }

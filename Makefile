@@ -7,6 +7,7 @@ SRCS_FRACTOL =	./srcs/fractol/main.c \
 				./srcs/fractol/fractol_control.c \
 				./srcs/fractol/create_palette.c \
 				./srcs/fractol/printing.c \
+				./srcs/fractol/add_axis.c \
 				./srcs/fractol/fractals/mandelbrot.c \
 				./srcs/fractol/fractals/julia.c \
 				./srcs/fractol/fractals/newton.c \
