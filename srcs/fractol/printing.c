@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printing.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/19 16:29:41 by amelikia          #+#    #+#             */
+/*   Updated: 2019/06/19 17:25:42 by amelikia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
 void		clear_image(t_fractol *fractol)
 {
-	int	 i;
-	int	 j;
-	int	 pos;
+	int	i;
+	int	j;
+	int	pos;
 
 	i = 0;
 	while (i < WIN_HEIGHT)
@@ -22,29 +34,29 @@ void		clear_image(t_fractol *fractol)
 	}
 }
 
-t_color		 define_color(int depth, t_fractol *fractol)
+t_color		define_color(int depth, t_fractol *fractol)
 {
-	t_color	 color;
+	t_color	color;
 
 	if (fractol->psychedelic == 1)
 	{
 		color.blue = fractol->psychedelic_palette[depth % 10]->blue;
 		color.green = fractol->psychedelic_palette[depth % 10]->green;
-		color.red = fractol->psychedelic_palette[depth % 10]->red;	
+		color.red = fractol->psychedelic_palette[depth % 10]->red;
 	}
 	else
 	{
 		color.blue = fractol->palette->color->blue + (depth * 2.62);
 		color.green = fractol->palette->color->green + (depth * 2.62);
-		color.red = fractol->palette->color->red + (depth * 2.62);	
+		color.red = fractol->palette->color->red + (depth * 2.62);
 	}
 	return (color);
 }
 
-void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point, t_fractol *))
+void		draw_fractal(t_fractol *fractol, int func)
 {
 	t_point		pixel;
-	 t_color	 color;
+	t_color		color;
 	int			depth;
 	int			pos;
 
@@ -54,16 +66,16 @@ void			draw_fractal(t_fractol *fractol, int (*define_fractal_pixel)(t_point, t_f
 		pixel.x = 0;
 		while (pixel.x < WIN_WIDTH)
 		{
-			 pixel.x += fractol->offset.x;
-			 pixel.y += fractol->offset.y;
+			pixel.x += fractol->offset.x;
+			pixel.y += fractol->offset.y;
 			depth = define_fractal_pixel(pixel, fractol);
-			 pixel.x -= fractol->offset.x;
-			 pixel.y -= fractol->offset.y;
-			 pos = pixel.x * 4 + 4 * WIN_WIDTH * pixel.y;
-			 color = define_color(depth, fractol);
+			pixel.x -= fractol->offset.x;
+			pixel.y -= fractol->offset.y;
+			pos = pixel.x * 4 + 4 * WIN_WIDTH * pixel.y;
+			color = define_color(depth, fractol);
 			fractol->image.data[pos] = color.blue;
 			fractol->image.data[pos + 1] = color.green;
-			fractol->image.data[pos + 2] = color.red;			
+			fractol->image.data[pos + 2] = color.red;
 			++pixel.x;
 		}
 		++pixel.y;
@@ -82,7 +94,6 @@ void		load_fractal(t_fractol *fractol)
 
 void		update_fractol(t_fractol *fractol)
 {
-
 	clear_image(fractol);
 	load_fractal(fractol);
 	if (fractol->axis == 1)
@@ -90,7 +101,8 @@ void		update_fractol(t_fractol *fractol)
 	mlx_put_image_to_window(fractol->mlx.init, fractol->mlx.win, \
 								fractol->mlx.img, 0, 0);
 	mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 5, 0xFFFFFF, \
-						ft_strjoin("Number of iterations : ", ft_itoa(fractol->iterations)));
+						ft_strjoin("Number of iterations : ",\
+						ft_itoa(fractol->iterations)));
 	mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 35, 0xFFFFFF, \
 						ft_strjoin("Zoom level: ", ft_itoa(fractol->zoom)));
 	mlx_string_put(fractol->mlx.init, fractol->mlx.win, 10, 65, 0xFFFFFF, \
