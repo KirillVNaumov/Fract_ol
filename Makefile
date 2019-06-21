@@ -8,13 +8,13 @@ SRCS_FRACTOL =	./srcs/fractol/main.c \
 				./srcs/fractol/create_palette.c \
 				./srcs/fractol/printing.c \
 				./srcs/fractol/add_axis.c \
+				./srcs/fractol/add_vertical_units.c \
+				./srcs/fractol/add_horizontal_units.c \
+				./srcs/fractol/draw_fractol.c \
 				./srcs/fractol/fractals/mandelbrot.c \
 				./srcs/fractol/fractals/julia.c \
 				./srcs/fractol/fractals/newton.c \
-				./srcs/fractol/fractals/function_and_derivative.c \
-				./srcs/fractol/add_vertical_units.c \
-				./srcs/fractol/add_horizontal_units.c \
-				./srcs/fractol/draw_fractol.c
+				./srcs/fractol/fractals/function_and_derivative.c
 
 SRCS_CALC =		./srcs/newton_function_generator/main.c \
 				./srcs/newton_function_generator/parse_input.c \
@@ -50,14 +50,14 @@ all: $(EXEC_FRACTOL)
 
 $(EXEC_CALC): $(OBJ_CALC) $(OBJ_UTILS)
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
-	# @make -C libft
+	@make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
 	@gcc -Wall -Wextra -Werror $(OBJ_CALC) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) -g  -o $(EXEC_CALC)
 	@echo "$(BLUE_EXTRA)$(EXEC_CALC)$(BLUE): Complete$(RESET)"
 
 $(EXEC_FRACTOL): $(OBJ_FRACTOL) $(OBJ_UTILS)
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
-	# @make -C libft
+	@make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
 	@gcc -Wall -Wextra -Werror $(OBJ_FRACTOL) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g  -o $(EXEC_FRACTOL)
 	@echo "$(BLUE_EXTRA)$(EXEC_FRACTOL)$(BLUE): Complete$(RESET)"
@@ -75,7 +75,7 @@ clean:
 	echo "$(RED)Deleting objects for $(RED_EXTRA)utils$(RESET)"; \
 	/bin/rm -rf $(OBJ_UTILS); \
 	fi
-	# @make -C libft clean
+	@make -C libft clean
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
 fclean: clean
@@ -87,7 +87,7 @@ fclean: clean
 	echo "$(RED)Deleting executable $(RED_EXTRA)$(EXEC_CALC)$(RESET)"; \
 	/bin/rm -f $(EXEC_CALC); \
 	fi
-	# @make -C libft fclean
+	@make -C libft fclean
 	@echo "$(BLUE_EXTRA)fclean$(BLUE): Complete$(RESET)"
 
 re: fclean all
