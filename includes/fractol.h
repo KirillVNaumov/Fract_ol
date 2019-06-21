@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:32:58 by knaumov           #+#    #+#             */
-/*   Updated: 2019/06/19 17:26:09 by amelikia         ###   ########.fr       */
+/*   Updated: 2019/06/21 13:39:15 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define WIN_HEIGHT 720
 # define THREADS 8
 # define COMPLEX double complex
-# define func (*define_fractal_pixel)(t_point, t_fractol *)
+# define FUNCTION (*define_fractal_pixel)(t_point, t_fractol *)
 
 # include "../minilibx_macos/mlx.h"
 # include "../libft/libft.h"
@@ -104,8 +104,8 @@ void					load_fractal(t_fractol *fractol);
 int						julia(t_point pixel, t_fractol *fractol);
 int						newton(t_point pixel, t_fractol *fractol);
 int						mandelbrot(t_point pixel, t_fractol *fractol);
-double complex			function(double complex z);
-double complex			derivative(double complex z);
+COMPLEX					function(COMPLEX z);
+COMPLEX					derivative(COMPLEX z);
 
 /*
 **  Utils

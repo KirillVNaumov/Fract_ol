@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 16:29:41 by amelikia          #+#    #+#             */
-/*   Updated: 2019/06/19 17:25:42 by amelikia         ###   ########.fr       */
+/*   Updated: 2019/06/21 13:39:19 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_color		define_color(int depth, t_fractol *fractol)
 	return (color);
 }
 
-void		draw_fractal(t_fractol *fractol, int func)
+void		draw_fractal(t_fractol *fractol, int FUNCTION)
 {
 	t_point		pixel;
 	t_color		color;

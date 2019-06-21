@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 21:42:23 by knaumov           #+#    #+#             */
-/*   Updated: 2019/06/19 16:17:13 by amelikia         ###   ########.fr       */
+/*   Updated: 2019/06/21 13:42:22 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,106 +55,6 @@ void		draw_horizontal_dash(int x, int y, t_fractol *fractol)
 		fractol->image.data[pos] = (char)255;
 		fractol->image.data[pos + 1] = (char)255;
 		fractol->image.data[pos + 2] = (char)255;
-	}
-}
-
-void		add_vertical_units_i_g_width(int *i, t_fractol *fractol)
-{
-	while (*i > WIN_WIDTH)
-		*i -= fractol->zoom;
-	while (*i > 0)
-	{
-		draw_vertical_dash(*i, fractol->origin.y + fractol->offset.y, fractol);
-		*i -= fractol->zoom;
-	}
-}
-
-void		add_vertical_units_i_l_zero(int *i, t_fractol *fractol)
-{
-	while (*i < 0)
-		*i += fractol->zoom;
-	while (*i < WIN_WIDTH)
-	{
-		draw_vertical_dash(*i, fractol->origin.y + fractol->offset.y, fractol);
-		*i += fractol->zoom;
-	}
-}
-
-void		add_vertical_units(t_fractol *fractol)
-{
-	int		i;
-
-	i = fractol->origin.x + fractol->offset.x;
-	if (i > WIN_WIDTH)
-		add_vertical_units_i_g_width(&i, fractol);
-	else if (i < 0)
-		add_vertical_units_i_l_zero(&i, fractol);
-	else
-	{
-		while (i > 0)
-		{
-			draw_vertical_dash(i, fractol->origin.y +\
-				fractol->offset.y, fractol);
-			i -= fractol->zoom;
-		}
-		i = fractol->origin.x + fractol->offset.x;
-		while (i < WIN_WIDTH)
-		{
-			draw_vertical_dash(i, fractol->origin.y +\
-				fractol->offset.y, fractol);
-			i += fractol->zoom;
-		}
-	}
-}
-
-void		add_horizontal_units_i_g_width(int *i, t_fractol *fractol)
-{
-	while (*i > WIN_HEIGHT)
-		*i -= fractol->zoom;
-	while (*i > 0)
-	{
-		draw_horizontal_dash(fractol->origin.x +\
-		fractol->offset.x, *i, fractol);
-		*i -= fractol->zoom;
-	}
-}
-
-void		add_horizontal_units_i_l_zero(int *i, t_fractol *fractol)
-{
-	while (*i < 0)
-		*i += fractol->zoom;
-	while (*i < WIN_HEIGHT)
-	{
-		draw_horizontal_dash(fractol->origin.x +
-		fractol->offset.x, *i, fractol);
-		*i += fractol->zoom;
-	}
-}
-
-void		add_horizontal_units(t_fractol *fractol)
-{
-	int		i;
-
-	i = fractol->origin.y + fractol->offset.y;
-	if (i > WIN_HEIGHT)
-		add_horizontal_units_i_g_width(&i, fractol);
-	else if (i < 0)
-		add_horizontal_units_i_l_zero(&i, fractol);
-	else
-	{
-		while (i > 0)
-		{
-			draw_horizontal_dash(fractol->origin.x +\
-			fractol->offset.x, i, fractol);
-			i -= fractol->zoom;
-		}
-		i = fractol->origin.y + fractol->offset.y;
-		while (i < WIN_HEIGHT)
-		{
-			draw_horizontal_dash(fractol->origin.x +\
-			fractol->offset.x, i, fractol);
-			i += fractol->zoom;
-		}
 	}
 }
 
