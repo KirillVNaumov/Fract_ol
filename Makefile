@@ -68,6 +68,10 @@ clean:
 	echo "$(RED)Deleting objects for $(RED_EXTRA)$(EXEC_CALC)$(RESET)"; \
 	/bin/rm -rf $(OBJ_CALC); \
 	fi
+	@if [ -a "utils/str_to_low.o" ]; then \
+	echo "$(RED)Deleting objects for $(RED_EXTRA)utils$(RESET)"; \
+	/bin/rm -rf $(OBJ_UTILS); \
+	fi
 	# @make -C libft clean
 	@echo "$(BLUE_EXTRA)clean$(BLUE): Complete$(RESET)"
 
