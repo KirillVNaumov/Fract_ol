@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:21:58 by knaumov           #+#    #+#             */
-/*   Updated: 2019/05/23 15:21:59 by knaumov          ###   ########.fr       */
+/*   Updated: 2019/06/21 14:19:50 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ char					*clear_spaces(char *str);
 char					*str_to_low(char *str);
 t_summand				*add_summand(t_summand *list, int coefficient, \
 									int power);
+void					clear_summand(t_summand *list);
 
 #endif

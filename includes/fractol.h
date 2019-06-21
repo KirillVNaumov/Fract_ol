@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:32:58 by knaumov           #+#    #+#             */
-/*   Updated: 2019/06/21 13:39:15 by amelikia         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:01:34 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,11 @@ void					add_axis(t_fractol *fractol);
 void					update_fractol(t_fractol *fractol);
 void					create_palette(t_fractol *fractol);
 void					add_axis(t_fractol *fractol);
+void					load_fractal(t_fractol *fractol);
+void					add_vertical_units(t_fractol *fractol);
+void					add_horizontal_units(t_fractol *fractol);
+void					draw_vertical_dash(int x, int y, t_fractol *fractol);
+void					draw_horizontal_dash(int x, int y, t_fractol *fractol);
 void					load_fractal(t_fractol *fractol);
 
 /*

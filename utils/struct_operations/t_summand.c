@@ -6,7 +6,7 @@
 /*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/19 17:16:45 by amelikia          #+#    #+#             */
-/*   Updated: 2019/06/19 17:17:14 by amelikia         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:19:09 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,11 @@ t_summand	*add_summand(t_summand *list, int coefficient, int power)
 		tmp = tmp->next;
 	tmp->next = new;
 	return (list);
+}
+
+void			clear_summand(t_summand *list)
+{
+	if (list->next)
+		clear_summand(list->next);
+	free(list);
 }

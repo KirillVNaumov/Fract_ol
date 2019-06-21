@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:38:57 by knaumov           #+#    #+#             */
-/*   Updated: 2019/05/23 15:38:58 by knaumov          ###   ########.fr       */
+/*   Updated: 2019/06/21 14:19:28 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void			optimize_summand(t_calc *info)
 		}
 		tmp = tmp->next;
 	}
+	clear_summand(info->function);
 	info->function = new;
 }
 
@@ -85,13 +86,18 @@ void			create_derivative(t_calc *info)
 int				main(int argc, char **argv)
 {
 	t_calc		info;
+	char		*str;
 
 	if (argc == 2)
 	{
-		parse_input(str_to_low(clear_spaces(ft_strdup(argv[1]))), &info);
+		str = clear_spaces(ft_strdup(argv[1]));
+		parse_input(str_to_low(str), &info);
+		free(str);
 		optimize_summand(&info);
 		create_derivative(&info);
 		create_file(&info);
+		clear_summand(info.derivative);
+		clear_summand(info.function);
 	}
 	else
 		print_usage();

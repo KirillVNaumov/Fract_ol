@@ -11,11 +11,14 @@ SRCS_FRACTOL =	./srcs/fractol/main.c \
 				./srcs/fractol/fractals/mandelbrot.c \
 				./srcs/fractol/fractals/julia.c \
 				./srcs/fractol/fractals/newton.c \
-				./srcs/fractol/fractals/function_and_derivative.c
+				./srcs/fractol/fractals/function_and_derivative.c \
+				./srcs/fractol/add_vertical_units.c \
+				./srcs/fractol/add_horizontal_units.c \
+				./srcs/fractol/draw_fractol.c
 
 SRCS_CALC =		./srcs/newton_function_generator/main.c \
 				./srcs/newton_function_generator/parse_input.c \
-				./srcs/newton_function_generator/create_file.c
+				./srcs/newton_function_generator/create_file.c 
 
 UTILS = 		./utils/struct_operations/t_point.c \
 				./utils/struct_operations/t_palette.c \
@@ -41,7 +44,7 @@ BLUE_EXTRA = \033[1;36m
 
 %.o:%.c
 	@echo "$(GREEN) - Creating $(GREEN_EXTRA)$<...$(RESET)"
-	@gcc -Wall -Wextra -Werror -g -c $< -o $@ $(INCLUDES)
+	@gcc -Wall -Wextra -Werror -g  -c $< -o $@ $(INCLUDES)
 
 all: $(EXEC_FRACTOL)
 
@@ -49,14 +52,14 @@ $(EXEC_CALC): $(OBJ_CALC) $(OBJ_UTILS)
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
 	# @make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC_CALC)$(RESET)"
-	@gcc -Wall -Wextra -Werror $(OBJ_CALC) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) -g -o $(EXEC_CALC)
+	@gcc -Wall -Wextra -Werror $(OBJ_CALC) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) -g  -o $(EXEC_CALC)
 	@echo "$(BLUE_EXTRA)$(EXEC_CALC)$(BLUE): Complete$(RESET)"
 
 $(EXEC_FRACTOL): $(OBJ_FRACTOL) $(OBJ_UTILS)
 	@echo "$(GREEN)Making objects files for $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
 	# @make -C libft
 	@echo "$(GREEN)Compiling executable $(GREEN_EXTRA)$(EXEC_FRACTOL)$(RESET)"
-	@gcc -Wall -Wextra -Werror $(OBJ_FRACTOL) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g -o $(EXEC_FRACTOL)
+	@gcc -Wall -Wextra -Werror $(OBJ_FRACTOL) $(OBJ_UTILS) $(LIBFT) $(INCLUDES) $(MINILIBX_INCLUDES) -L minilibx_macos -lmlx -framework OpenGL -framework AppKit -g  -o $(EXEC_FRACTOL)
 	@echo "$(BLUE_EXTRA)$(EXEC_FRACTOL)$(BLUE): Complete$(RESET)"
 
 clean:

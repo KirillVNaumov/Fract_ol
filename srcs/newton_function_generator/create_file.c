@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: knaumov <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: amelikia <amelikia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 15:50:18 by knaumov           #+#    #+#             */
-/*   Updated: 2019/05/23 15:50:19 by knaumov          ###   ########.fr       */
+/*   Updated: 2019/06/21 14:10:27 by amelikia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char			*struct_to_code(t_summand *list)
 {
 	char		*answer;
+	char		*str;
 	int			counter;
 	int			if_first;
 
@@ -27,8 +28,9 @@ char			*struct_to_code(t_summand *list)
 		if (list->coefficient < 0)
 			answer = ft_update(answer, ft_strjoin(answer, " - "));
 		if_first = 0;
-		answer = ft_update(answer, \
-				ft_strjoin(answer, ft_itoa(ft_abs(list->coefficient))));
+		str = ft_itoa(ft_abs(list->coefficient));
+		answer = ft_update(answer, ft_strjoin(answer, str));
+		free(str);
 		counter = 0;
 		while (counter++ < list->power)
 			answer = ft_update(answer, ft_strjoin(answer, " * z"));
@@ -59,4 +61,6 @@ void			create_file(t_calc *info)
 	ft_putstr_fd(derivative, fd);
 	ft_putstr_fd(");\n}\n", fd);
 	close(fd);
+	free(function);
+	free(derivative);
 }
